@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mustruut-gradle.iml" filepath="$PROJECT_DIR$/mustruut-gradle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mustruut-gradle.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mustruut-gradle.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mustruut-gradle.test.iml" filepath="$PROJECT_DIR$/.idea/modules/mustruut-gradle.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TripsTrapsTrull.iml" filepath="$PROJECT_DIR$/.idea/modules/TripsTrapsTrull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TripsTrapsTrull.main.iml" filepath="$PROJECT_DIR$/.idea/modules/TripsTrapsTrull.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TripsTrapsTrull.test.iml" filepath="$PROJECT_DIR$/.idea/modules/TripsTrapsTrull.test.iml" />
     </modules>
   </component>
 </project>

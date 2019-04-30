@@ -1,3 +1,4 @@
+
 package oop;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +17,6 @@ public class TripsTrapsTrull {
         // Eemaldab äsja kasutatud ruudu vabade listist.
         laud.eemaldaVabadest(käiguKoord);
     }
-
 
 
     public static int[] ruutKoordinaatideks(int ruut) {

@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="mustruut-gradle.main" target="11" />
       <module name="mustruut-gradle.test" target="11" />
+      <module name="TripsTrapsTrull.main" target="11" />
+      <module name="TripsTrapsTrull.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

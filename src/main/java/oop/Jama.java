@@ -1,4 +1,5 @@
 // Klass sisaldab meetodeid, mis keelavad mängijal võita.
+
 package oop;
 import java.util.ArrayList;
 
