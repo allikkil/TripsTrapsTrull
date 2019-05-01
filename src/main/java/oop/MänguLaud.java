@@ -1,11 +1,14 @@
 package oop;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -17,7 +20,149 @@ import java.util.Arrays;
 
 
 public class MänguLaud extends Application {
-    Group juur = new Group();
+    private String iNupp; // mängija ja arvuti nupud; 'X' või 'O'
+    private String aNupp;
+
+    public String getiNupp() {
+        return iNupp;
+    }
+
+    public void setiNupp(String iNupp) {
+        this.iNupp = iNupp;
+    }
+
+    public String getaNupp() {
+        return aNupp;
+    }
+
+    public void setaNupp(String aNupp) {
+        this.aNupp = aNupp;
+    }
+
+    public void alustaMängu() {
+        Stage lava = new Stage();
+        Label label = new Label("Edu!");
+
+        Button nupp1 = new Button();
+        Button nupp2 = new Button();
+        Button nupp3 = new Button();
+        Button nupp4 = new Button();
+        Button nupp5 = new Button();
+        Button nupp6 = new Button();
+        Button nupp7 = new Button();
+        Button nupp8 = new Button();
+        Button nupp9 = new Button();
+
+        double nuppSize = 75;
+
+        nupp1.setMinWidth(nuppSize);
+        nupp1.setMinHeight(nuppSize);
+        nupp2.setMinWidth(nuppSize);
+        nupp2.setMinHeight(nuppSize);
+        nupp3.setMinWidth(nuppSize);
+        nupp3.setMinHeight(nuppSize);
+        nupp4.setMinWidth(nuppSize);
+        nupp4.setMinHeight(nuppSize);
+        nupp5.setMinWidth(nuppSize);
+        nupp5.setMinHeight(nuppSize);
+        nupp6.setMinWidth(nuppSize);
+        nupp6.setMinHeight(nuppSize);
+        nupp7.setMinWidth(nuppSize);
+        nupp7.setMinHeight(nuppSize);
+        nupp8.setMinWidth(nuppSize);
+        nupp8.setMinHeight(nuppSize);
+        nupp9.setMinWidth(nuppSize);
+        nupp9.setMinHeight(nuppSize);
+
+        GridPane ruudud = new GridPane();
+        ruudud.add(nupp1, 0, 0);
+        ruudud.add(nupp2, 1, 0);
+        ruudud.add(nupp3, 2, 0);
+        ruudud.add(nupp4, 0, 1);
+        ruudud.add(nupp5, 1, 1);
+        ruudud.add(nupp6, 2, 1);
+        ruudud.add(nupp7, 0, 2);
+        ruudud.add(nupp8, 1, 2);
+        ruudud.add(nupp9, 2, 2);
+
+        ruudud.setAlignment(Pos.BOTTOM_CENTER);
+        Scene stseen = new Scene(ruudud);
+        lava.setScene(stseen);
+        lava.setMinHeight(500);
+        lava.setMinWidth(300);
+        lava.setResizable(true);
+        lava.show();
+    }
+
+
+    @Override
+    public void start(Stage peaLava) throws Exception {
+        Stage väljak = new Stage();
+
+        Label label = new Label("Vali oma nupp");
+        Button nuppX = new Button("X");
+        Button nuppO = new Button("O");
+
+        double nuppSize = 50;
+        double txtSize = 25;
+
+        label.setFont(new Font(txtSize));
+        nuppX.setMinHeight(nuppSize);
+        nuppX.setMinWidth(nuppSize);
+        nuppX.setFont(new Font(txtSize));
+        nuppO.setMinHeight(nuppSize);
+        nuppO.setMinWidth(nuppSize);
+        nuppO.setFont(new Font(txtSize));
+
+        // sündmuse lisamine nupule X
+        nuppX.setOnAction(event -> {
+            setiNupp("X");
+            setaNupp("O");
+            alustaMängu();
+            väljak.close();
+             });
+
+        // sündmuse lisamine nupule O
+        nuppO.setOnAction(event -> {
+            setiNupp("O");
+            setaNupp("X");
+            alustaMängu();
+            väljak.close();
+             });
+
+        // nuppude grupeerimine
+        FlowPane pane = new FlowPane(50, 10);
+        pane.setAlignment(Pos.TOP_CENTER);
+        pane.getChildren().addAll(nuppX, nuppO);
+
+        // küsimuse ja nuppude gruppi paigutamine
+        VBox vBox = new VBox(25);
+        vBox.setAlignment(Pos.TOP_CENTER);
+        vBox.getChildren().addAll(label, pane);
+
+        Scene stseen = new Scene(vBox);
+        väljak.setScene(stseen);
+        väljak.setMinHeight(170);
+        väljak.setMinWidth(500);
+        väljak.setResizable(false);
+        väljak.show();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*Group juur = new Group();
     private String iNupp;
     private String aNupp;
     private ArrayList<int[]> vabad = genereeriVabad();
@@ -168,25 +313,17 @@ public class MänguLaud extends Application {
         nuppX.setOnMouseClicked(event -> {
             iNupp = "X";
             aNupp = "O";
-            juur.getChildren().remove(nuppX);
-            juur.getChildren().remove(nuppO);
-
         });
 
         nuppO.setOnMouseClicked(event -> {
             iNupp = "O";
             aNupp = "X";
-            juur.getChildren().remove(nuppX);
-            juur.getChildren().remove(nuppO);
-
         });
         juur.getChildren().addAll(nuppX, nuppO);
     }
 
     @Override
     public void start(Stage peaLava) throws InterruptedException {
-
-
         peaLava.setScene(new Scene(juur, 600, 700));
         peaLava.setTitle("TripsTrapsTroll");
         nupud();
@@ -201,10 +338,7 @@ public class MänguLaud extends Application {
     class Ruut extends StackPane {
         private Text nupp = new Text();
 
-
         public Ruut(){
-
-
             nupp.setFont(Font.font(120));
             Rectangle mänguRuut = new Rectangle(200, 200);
 
@@ -214,7 +348,6 @@ public class MänguLaud extends Application {
             getChildren().addAll(mänguRuut, nupp);
 
             setOnMouseClicked(event -> {
-
                 if(iNupp.equals("X")){
                     nuppX();
 
@@ -222,25 +355,22 @@ public class MänguLaud extends Application {
                     eemaldaVabadest(ruutKoordinaatideks(asukoht));
 
                     aKäik(laud, aNupp);
-
-
-                } else if(iNupp.equals("O")){
+                }
+                else if(iNupp.equals("O")){
                     nuppO();
 
                     int asukoht = kontrolliAsukoht(event.getSceneX(), event.getSceneY());
                     eemaldaVabadest(ruutKoordinaatideks(asukoht));
 
                     aKäik(laud, aNupp);
-
                 }
             });
-
         }
+
         //nupu tähistamiseks
         private void nuppX() {
             nupp.setText("X");
         }
-
         private void nuppO() {
             nupp.setText("O");
         }
@@ -250,8 +380,7 @@ public class MänguLaud extends Application {
         private void setNupp(String nupuTähis){
             nupp.setText(nupuTähis);
         }
-
-    }
+    }*/
 
     public static void main(String[] args) {
         launch(args);
