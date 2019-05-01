@@ -162,6 +162,10 @@ public class MänguLaud extends Application {
     private ArrayList<int[]> vabad = genereeriVabad();
     private Ruut[][] laud;
     private Text info;
+    private Text seis;
+    private int aVõite;
+    private int iVõite;
+    private int Viike;
 
 
     public Ruut[][] Mlaud() {
@@ -178,10 +182,10 @@ public class MänguLaud extends Application {
         return laud;
     }
 
-    public boolean laudTäis(String[][] seis){
-        for(int i = 0; i<3; i++){
-            for(int j = 0; j<3; j++){
-                if(seis[i][j].equals("")){
+    public boolean laudTäis(String[][] seis) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (seis[i][j].equals("")) {
                     return false;
                 }
             }
@@ -244,19 +248,6 @@ public class MänguLaud extends Application {
         return null; // Selle reani ei jõuta praktikas kunagi, aga ilma selle käsuta viskab veateate.
     }
 
-  /*  public void uuendaLaud() {
-        String[][] seis = lauaSeis(laud);
-        int[] koordinaadid = new int[2];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (!seis[i][j].equals("")) {
-                    koordinaadid[0] = i;
-                    koordinaadid[1] = j;
-                    eemaldaVabadest(koordinaadid);
-                }
-            }
-        }
-    }*/
 
     public String[][] lauaSeis(Ruut[][] laud) {
         String[][] seis = new String[3][3];
@@ -305,10 +296,7 @@ public class MänguLaud extends Application {
     }
 
     public void eemaldaVabadest(int[] ruuduKoord) {
-        // Sisend: kustutamisele mineva ruudu koordinaadid.
-        // Meetod kustutab vabade ruutude massiivist äsja kasutatud ruudu koordinaadid.
 
-        // Eemaldamine toimub indexi kaudu, sest teisiti ei saanud tööle...
         vabad.remove(koordRuuduks(ruuduKoord));
     }
 
@@ -362,6 +350,20 @@ public class MänguLaud extends Application {
         info.setY(625);
         juur.getChildren().add(info);
         return info;
+    }
+
+    public void seisuTekst(Text seis, int aVõite, int iVõite, int Viike) {
+
+        seis.setText("Arvuti: " + aVõite + " Kasutaja: " + iVõite + " Viike: " + Viike);
+
+    }
+
+    public Text seisuKast() {
+        Text seis = new Text();
+        seis.setX(200);
+        seis.setY(610);
+        juur.getChildren().add(seis);
+        return seis;
     }
 
     public static String võitja(String[][] laud) {
@@ -420,10 +422,8 @@ public class MänguLaud extends Application {
             }
         }
         info.setText("Alustan uut mängu");
-        nupud();
+
     }
-
-
 
 
     //Siit algavad jamamise asjad
@@ -447,17 +447,14 @@ public class MänguLaud extends Application {
         if (meetodiIndex == 1) {
             // Äsja mängija pandud nupp asendatakse arvuti nupuga.
             asendaNupp(vahetuseKoord, aNupp);
-        }
-        else if (meetodiIndex == 2) {
+        } else if (meetodiIndex == 2) {
             // Kogu mängulaud kustutatakse.
             info.setText("See küll hea valik polnud.");
             uusMäng();
-        }
-        else if (meetodiIndex == 3) {
+        } else if (meetodiIndex == 3) {
             // Arvuti ei lase sinna ruutu käia.
             jätaKäikVahele(vahetuseKoord);
-        }
-        else if (meetodiIndex == 4) {
+        } else if (meetodiIndex == 4) {
             // vahetame laual kõik nupud omavahel ära.
             vahetaKõik();
         }
@@ -469,7 +466,9 @@ public class MänguLaud extends Application {
         // Meetod vahetab ühe nupu mingi muu nupu vastu.
         laud[vahetuseKoord[0]][vahetuseKoord[1]].setNupp(uusNupp);
         if (võitja(lauaSeis(laud)).equals(aNupp)) {
-            info.setText("Võitjaks osutus: " + aNupp);
+            info.setText("Võitjaks osutus 2: " + aNupp);
+            aVõite += 1;
+            seisuTekst(seis, aVõite, iVõite, Viike);
             lõpuNupud();
         }
     }
@@ -481,7 +480,13 @@ public class MänguLaud extends Application {
         info.setText("Ma ei arva et see on hea mõte, käik jääb vahele.");
         asendaNupp(vahetuseKoord, " ");
         vabad.add(vahetuseKoord);
-        aKäik(laud, aNupp);
+        /*aKäik(laud, aNupp);
+        if (võitja(lauaSeis(laud)).equals(aNupp)) {
+            info.setText("Võitjaks osutus 3: " + aNupp);
+            aVõite +=1;
+            seisuTekst(seis, aVõite, iVõite, Viike);
+            lõpuNupud();
+        }*/
     }
 
 
@@ -490,15 +495,16 @@ public class MänguLaud extends Application {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (laud[i][j].getNupp().equals("X")) {
-                    asendaNupp(new int[] {i, j}, "O");
-                }
-                else if(laud[i][j].getNupp().equals("O")){
-                    asendaNupp(new int[] {i, j}, "X");
+                    asendaNupp(new int[]{i, j}, "O");
+                } else if (laud[i][j].getNupp().equals("O")) {
+                    asendaNupp(new int[]{i, j}, "X");
                 }
             }
         }
-        info.setText("Võitjaks osutus: " + aNupp);
-        lõpuNupud();
+        info.setText("Võitjaks osutus 4: " + aNupp);
+
+        seisuTekst(seis, aVõite, iVõite, Viike);
+        //lõpuNupud();
     }
 
 
@@ -512,7 +518,11 @@ public class MänguLaud extends Application {
         laud[0][0].getNupp();
         vabad = genereeriVabad();
         info = infoTekst();
-
+        aVõite = 0;
+        iVõite = 0;
+        Viike = 0;
+        seis = seisuKast();
+        seisuTekst(seis, aVõite, iVõite, Viike);
         peaLava.show();
     }
 
@@ -537,16 +547,30 @@ public class MänguLaud extends Application {
                     if (võitja(lauaSeis(laud)).equals(iNupp)) {
                         jama(ruutKoordinaatideks(asukoht));
                     } else {
-                        if(laudTäis(lauaSeis(laud))){
-                            info.setText("Tekkis viik");
-                            uusMäng();
-                        }
-
-
-                        aKäik(laud, aNupp);
-                        if (võitja(lauaSeis(laud)).equals(aNupp)) {
-                            info.setText("Võitjaks osutus: " + aNupp);
+                        if (laudTäis(lauaSeis(laud))) {
+                            info.setText("Tekkis viik 3");
+                            Viike += 1;
+                            seisuTekst(seis, aVõite, iVõite, Viike);
                             lõpuNupud();
+
+                        } else {
+
+
+                            aKäik(laud, aNupp);
+
+                            if (laudTäis(lauaSeis(laud))) {
+                                info.setText("Tekkis viik 4");
+                                Viike += 1;
+                                seisuTekst(seis, aVõite, iVõite, Viike);
+                                lõpuNupud();
+
+                            }
+                            if (võitja(lauaSeis(laud)).equals(aNupp)) {
+                                info.setText("Võitjaks osutus 5: " + aNupp);
+                                aVõite += 1;
+                                seisuTekst(seis, aVõite, iVõite, Viike);
+                                lõpuNupud();
+                            }
                         }
                     }
 
@@ -559,15 +583,27 @@ public class MänguLaud extends Application {
                         jama(ruutKoordinaatideks(asukoht));
 
                     } else {
-                        if(laudTäis(lauaSeis(laud))){
-                            info.setText("Tekkis viik");
-                            uusMäng();
-                        }
-                        aKäik(laud, aNupp);
-
-                        if (võitja(lauaSeis(laud)).equals(aNupp)) {
-                            info.setText("Võitjaks osutus: " + aNupp);
+                        if (laudTäis(lauaSeis(laud))) {
+                            info.setText("Tekkis viik 1");
+                            Viike += 1;
+                            seisuTekst(seis, aVõite, iVõite, Viike);
                             lõpuNupud();
+                        } else {
+                            aKäik(laud, aNupp);
+
+                            if (laudTäis(lauaSeis(laud))) {
+                                info.setText("Tekkis viik 2");
+                                Viike += 1;
+                                seisuTekst(seis, aVõite, iVõite, Viike);
+                                lõpuNupud();
+
+                            }
+                            if (võitja(lauaSeis(laud)).equals(aNupp)) {
+                                info.setText("Võitjaks osutus 1: " + aNupp);
+                                aVõite += 1;
+                                seisuTekst(seis, aVõite, iVõite, Viike);
+                                lõpuNupud();
+                            }
                         }
                     }
 
