@@ -1,3 +1,4 @@
+
 package oop;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -104,7 +105,7 @@ public class TripsTrapsTrull {
         Laud laud = new Laud(new String[][] {
                 {" "," "," "},
                 {" "," "," "},
-                {" "," "," "}}, new ArrayList<>(), iNupp, aNupp);
+                {" "," "," "}}, new ArrayList<>(), iNupp, aNupp, "");
 
 
         // Vabade ruutude massiiv täidetakse.
