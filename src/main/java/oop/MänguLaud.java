@@ -33,7 +33,6 @@ import static oop.Kontroll.kontroll;
 
 public class MänguLaud extends Application {
     GridPane juur = new GridPane();
-    Stage stgMäng = new Stage();
     GridPane ruudud = new GridPane();
     Label label = new Label("Edu!");
     boolean arvutiBanter = true; // kas ekraanile kuvatakse mõni taibukas kommentaar
@@ -77,6 +76,8 @@ public class MänguLaud extends Application {
 
         // Luuakse uus ruudustik.
         ruudud.getChildren().clear();
+        Stage stgMäng = new Stage();
+        Scene stseen = new Scene(ruudud);
 
         // nuppudest ruutude loomine
         Button ruut1 = new Button();
@@ -119,6 +120,16 @@ public class MänguLaud extends Application {
             rc.setFillHeight(true);
             ruudud.getRowConstraints().add(rc);
         }
+
+        ruut1.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut2.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut3.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut4.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut5.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut6.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut7.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut8.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruut9.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         /*RowConstraints rida0 = new RowConstraints();
         rida0.setPercentHeight(40); // esimene rida võtab enda alla 40% aknast
@@ -178,19 +189,11 @@ public class MänguLaud extends Application {
             mainLoop(laud, 9);
         });
 
-        // Näidatakse ka mängijale.
-        Scene stseen = new Scene(ruudud);
-        stgMäng.setScene(stseen);
-        stgMäng.setMinHeight(536.0);
-        stgMäng.setMinWidth(600.0);
-        stgMäng.setResizable(true);
-        stgMäng.show();
-
         // Kõik GridPane-i elemendid muudetakse skaleeruvaks.
         ruudud.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                double height = (double) newValue * 10 / 6;
+                double height = (double) newValue / 4;
                 for (Node child : ruudud.getChildren()) { child.prefHeight(height); }
             }
         });
@@ -198,10 +201,17 @@ public class MänguLaud extends Application {
         ruudud.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                double width = (double) newValue * 10 / 6;
+                double width = (double) newValue / 3;
                 for (Node child : ruudud.getChildren()) { child.prefWidth(width); }
             }
         });
+
+        // Näidatakse ka mängijale.
+        stgMäng.setScene(stseen);
+//        stgMäng.setMinHeight(536.0);
+//        stgMäng.setMinWidth(600.0);
+        stgMäng.setResizable(true);
+        stgMäng.show();
     }
 
     public void asendaNupp(Laud laud, int[] vahetuseKoord, String uusNupp) {
@@ -228,6 +238,8 @@ public class MänguLaud extends Application {
         double x = Math.random(); // [0.0; 1.0)
         x = x * meetoditeArv + 1.0; // [1.0; meetodite arv + 1.0)
         int meetodiIndex = (int) Math.floor(x); // {1, 2, 3, ..., meetodite arv}
+
+        meetodiIndex = 2;
 
         if (meetodiIndex == 1) {
             // Äsja mängija pandud nupp asendatakse arvuti nupuga.
@@ -327,9 +339,7 @@ public class MänguLaud extends Application {
 
                 // Luuakse uus nupp.
                 Button uusNupp = new Button(nupp);
-                uusNupp.setFont(new Font(40));
-                uusNupp.setMinHeight(100);
-                uusNupp.setMinWidth(100);
+                uusNupp.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
                 // Uus nupp lisatakse vana asukohale.
                 ruudud.add(uusNupp, tulp, rida);
@@ -365,7 +375,6 @@ public class MänguLaud extends Application {
             }
         }
     }
-
 
     public void alustaMängu(Laud laud) {
         // Mängulaud tühjendatakse (vajalik juhul, kui alustati mitmendat raundi).

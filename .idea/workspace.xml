@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df70f2c0-fe12-49fa-b449-a203faeb8f99" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/oop/MänguLaud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/oop/MänguLaud.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -58,11 +57,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/oop/MänguLaud.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="116" column="18" selection-start-line="116" selection-start-column="18" selection-end-line="116" selection-end-column="18" />
+            <state relative-caret-position="2224">
+              <caret line="208" column="35" selection-start-line="208" selection-start-column="35" selection-end-line="208" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#29455#29456#0" expanded="true" />
+                <element signature="e#30018#30019#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,6 +121,12 @@
       <find>ruut</find>
       <find>uusm</find>
       <find>uu</find>
+      <find>kuva</find>
+      <find>kuvaK</find>
+      <find>kustu</find>
+      <find>peaLava</find>
+      <find>jama</find>
+      <find>stg</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -252,7 +257,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
@@ -270,7 +274,7 @@
       <window_info anchor="bottom" id="Build" order="6" weight="0.044692736" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" />
-      <window_info active="true" anchor="bottom" id="Run" order="9" visible="true" weight="0.22525597" />
+      <window_info active="true" anchor="bottom" id="Run" order="9" visible="true" weight="0.29522184" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.1569966" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -586,11 +590,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/oop/MänguLaud.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="116" column="18" selection-start-line="116" selection-start-column="18" selection-end-line="116" selection-end-column="18" />
+        <state relative-caret-position="2224">
+          <caret line="208" column="35" selection-start-line="208" selection-start-column="35" selection-end-line="208" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#29455#29456#0" expanded="true" />
+            <element signature="e#30018#30019#0" expanded="true" />
           </folding>
         </state>
       </provider>
