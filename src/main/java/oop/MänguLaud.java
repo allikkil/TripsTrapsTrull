@@ -75,7 +75,7 @@ public class MänguLaud extends Application {
         laud.setVabad(genereeriVabad());
 
         // Luuakse uus ruudustik.
-        ruudud.getChildren().clear();
+        ruudud = new GridPane();
         Stage stgMäng = new Stage();
         Scene stseen = new Scene(ruudud);
 
