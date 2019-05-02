@@ -36,6 +36,8 @@ public class MänguLaud extends Application {
     Stage stgMäng = new Stage();
     GridPane ruudud = new GridPane();
     Label label = new Label("Edu!");
+    boolean arvutiBanter = true; // kas ekraanile kuvatakse mõni taibukas kommentaar
+    boolean käikJäetiVahele = false; // viimases hädas appi võetud muutuja, et ruudud õigesti töötaksid
 
     // Jamamismeetodid
     public void vahetaKõik(Laud laud) {
@@ -51,13 +53,17 @@ public class MänguLaud extends Application {
             }
         }
         label.setText("Aitäh, et minu eest kogu \ntöö ära tegid!");
+        arvutiBanter = false;
     }
 
     public void jätaKäikVahele(Laud laud, int[] vahetuseKoord) {
         // Meetod asendab mängija käigu tühja ruuduga ja
         // uuendab ka vabade ruutude massiivi.
+        käikJäetiVahele = true;
         asendaNupp(laud, vahetuseKoord, " ");
         laud.lisaVabadesse(vahetuseKoord);
+        label.setText("Ma ei arva, et see on hea mõte.\nKäik jääb vahele.");
+        arvutiBanter = false;
     }
 
     public void kustutaJaLooUusRuudustik(Laud laud) {
@@ -70,6 +76,8 @@ public class MänguLaud extends Application {
         laud.setVabad(genereeriVabad());
 
         // Luuakse uus ruudustik.
+        ruudud.getChildren().clear();
+
         // nuppudest ruutude loomine
         Button ruut1 = new Button();
         Button ruut2 = new Button();
@@ -95,16 +103,34 @@ public class MänguLaud extends Application {
         ruudud.setAlignment(Pos.BOTTOM_CENTER);
 
         // GridPane paigutus
-        RowConstraints rida0 = new RowConstraints();
-        rida0.setPercentHeight(40);
+        // kolme tulba paigutus
+        for (int x = 0 ; x <= 2 ; x++) {
+            ColumnConstraints cc = new ColumnConstraints();
+            cc.setPercentWidth(100.0 / 3);
+            cc.setHgrow(Priority.ALWAYS);
+            cc.setFillWidth(true);
+            ruudud.getColumnConstraints().add(cc);
+        }
+        // nelja rea paigutus
+        for (int y = 0 ; y <= 3; y++) {
+            RowConstraints rc = new RowConstraints();
+            rc.setPercentHeight(100.0 / 4);
+            rc.setVgrow(Priority.ALWAYS);
+            rc.setFillHeight(true);
+            ruudud.getRowConstraints().add(rc);
+        }
+
+        /*RowConstraints rida0 = new RowConstraints();
+        rida0.setPercentHeight(40); // esimene rida võtab enda alla 40% aknast
+        label.maxWidth(Double.MAX_VALUE);
         rida0.setValignment(VPos.TOP);
-        ruudud.getRowConstraints().addAll(rida0);
-        GridPane.setMargin(label, new Insets(5, 5, 5, 5));
-        GridPane.setColumnSpan(label, 3);
+        ruudud.getRowConstraints().addAll(rida0);*/
+
+        GridPane.setColumnSpan(label, 3); // GridPane-i labeli rea kolm celli liidetakse üheks celliks
 
         // ruutude modifitseerimine
         double nuppSize = 100.0;
-        ruut1.setMinWidth(nuppSize);
+        /*ruut1.setMinWidth(nuppSize);
         ruut1.setMinHeight(nuppSize);
         ruut2.setMinWidth(nuppSize);
         ruut2.setMinHeight(nuppSize);
@@ -121,7 +147,7 @@ public class MänguLaud extends Application {
         ruut8.setMinWidth(nuppSize);
         ruut8.setMinHeight(nuppSize);
         ruut9.setMinWidth(nuppSize);
-        ruut9.setMinHeight(nuppSize);
+        ruut9.setMinHeight(nuppSize);*/
 
         // Ruutudele luuakse funktsioon
         ruut1.setOnAction(event -> {
@@ -155,17 +181,37 @@ public class MänguLaud extends Application {
         // Näidatakse ka mängijale.
         Scene stseen = new Scene(ruudud);
         stgMäng.setScene(stseen);
-        stgMäng.setMinHeight(500.0);
+        stgMäng.setMinHeight(536.0);
         stgMäng.setMinWidth(600.0);
         stgMäng.setResizable(true);
         stgMäng.show();
+
+        // Kõik GridPane-i elemendid muudetakse skaleeruvaks.
+        ruudud.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double height = (double) newValue * 10 / 6;
+                for (Node child : ruudud.getChildren()) { child.prefHeight(height); }
+            }
+        });
+
+        ruudud.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double width = (double) newValue * 10 / 6;
+                for (Node child : ruudud.getChildren()) { child.prefWidth(width); }
+            }
+        });
     }
 
     public void asendaNupp(Laud laud, int[] vahetuseKoord, String uusNupp) {
         // Sisend: ruudu koordinaadid, millel nupp vahetatakse; väärtus, mille vastu vahetatakse.
         // Meetod vahetab ühe nupu mingi muu nupu vastu.
         laud.käikLauale(vahetuseKoord[0], vahetuseKoord[1], uusNupp);
-        kuvaKäik(vahetuseKoord, uusNupp);
+
+        if (!käikJäetiVahele) { kuvaKäik(vahetuseKoord, uusNupp); }
+        käikJäetiVahele = false;
+        arvutiBanter = false;
     }
 
     public void jama(Laud laud, int[] vahetuseKoord) {
@@ -190,6 +236,7 @@ public class MänguLaud extends Application {
         else if (meetodiIndex == 2) {
             // Kogu mängulaud kustutatakse.
             label.setText("See küll hea valik polnud.");
+            arvutiBanter = false;
             kustutaJaLooUusRuudustik(laud);
         }
         else if (meetodiIndex == 3) {
@@ -259,6 +306,12 @@ public class MänguLaud extends Application {
 
         // Kuvatakse käik.
         kuvaKäik(käiguKoord, laud.getaNupp());
+
+        // Kui arvutil on kohane kuvada kommentaar.
+        if (arvutiBanter) {
+            label.setText("Katsu selle vastu saada!");
+        }
+        arvutiBanter = true;
     }
 
     public void kuvaKäik(int[] käiguKoord, String nupp) {
@@ -298,9 +351,9 @@ public class MänguLaud extends Application {
             }
 
             if (Kontroll.võitja(laud).equals(laud.getaNupp())) {
+                label.setText("Veel üks võit tehisintellekti jaoks!");
             }
             else if (laud.getVabad().size() > 0) {
-                label.setText("Katsu selle vastu saada!");
                 aKäik(laud);
 
                 if (Kontroll.võitja(laud).equals(laud.getaNupp())) {
