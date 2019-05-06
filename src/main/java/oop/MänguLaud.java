@@ -37,6 +37,9 @@ public class MänguLaud extends Application {
     Label label = new Label("Edu!");
     boolean arvutiBanter = true; // kas ekraanile kuvatakse mõni taibukas kommentaar
     boolean käikJäetiVahele = false; // viimases hädas appi võetud muutuja, et ruudud õigesti töötaksid
+    Stage peaLava2 = new Stage();
+    Stage stgMäng = new Stage();
+
 
     // Jamamismeetodid
     public void vahetaKõik(Laud laud) {
@@ -44,10 +47,9 @@ public class MänguLaud extends Application {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (laud.getLaud()[i][j].equals("X")) {
-                    asendaNupp(laud, new int[] {i, j}, "O");
-                }
-                else if(laud.getLaud()[i][j].equals("O")){
-                    asendaNupp(laud, new int[] {i, j}, "X");
+                    asendaNupp(laud, new int[]{i, j}, "O");
+                } else if (laud.getLaud()[i][j].equals("O")) {
+                    asendaNupp(laud, new int[]{i, j}, "X");
                 }
             }
         }
@@ -67,10 +69,10 @@ public class MänguLaud extends Application {
 
     public void kustutaJaLooUusRuudustik(Laud laud) {
         // Meetod kustutab mängulaualt kõik käigud.
-        laud.setLaud(new String[][] {
-                {" "," "," "},
-                {" "," "," "},
-                {" "," "," "}});
+        laud.setLaud(new String[][]{
+                {" ", " ", " "},
+                {" ", " ", " "},
+                {" ", " ", " "}});
         // Ka vabade ruutude massiiv lähtestatakse.
         laud.setVabad(genereeriVabad());
 
@@ -105,7 +107,7 @@ public class MänguLaud extends Application {
 
         // GridPane paigutus
         // kolme tulba paigutus
-        for (int x = 0 ; x <= 2 ; x++) {
+        for (int x = 0; x <= 2; x++) {
             ColumnConstraints cc = new ColumnConstraints();
             cc.setPercentWidth(100.0 / 3);
             cc.setHgrow(Priority.ALWAYS);
@@ -113,7 +115,7 @@ public class MänguLaud extends Application {
             ruudud.getColumnConstraints().add(cc);
         }
         // nelja rea paigutus
-        for (int y = 0 ; y <= 3; y++) {
+        for (int y = 0; y <= 3; y++) {
             RowConstraints rc = new RowConstraints();
             rc.setPercentHeight(100.0 / 4);
             rc.setVgrow(Priority.ALWAYS);
@@ -194,7 +196,9 @@ public class MänguLaud extends Application {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double height = (double) newValue / 4;
-                for (Node child : ruudud.getChildren()) { child.prefHeight(height); }
+                for (Node child : ruudud.getChildren()) {
+                    child.prefHeight(height);
+                }
             }
         });
 
@@ -202,7 +206,9 @@ public class MänguLaud extends Application {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double width = (double) newValue / 3;
-                for (Node child : ruudud.getChildren()) { child.prefWidth(width); }
+                for (Node child : ruudud.getChildren()) {
+                    child.prefWidth(width);
+                }
             }
         });
 
@@ -219,7 +225,9 @@ public class MänguLaud extends Application {
         // Meetod vahetab ühe nupu mingi muu nupu vastu.
         laud.käikLauale(vahetuseKoord[0], vahetuseKoord[1], uusNupp);
 
-        if (!käikJäetiVahele) { kuvaKäik(vahetuseKoord, uusNupp); }
+        if (!käikJäetiVahele) {
+            kuvaKäik(vahetuseKoord, uusNupp);
+        }
         käikJäetiVahele = false;
         arvutiBanter = false;
     }
@@ -239,23 +247,19 @@ public class MänguLaud extends Application {
         x = x * meetoditeArv + 1.0; // [1.0; meetodite arv + 1.0)
         int meetodiIndex = (int) Math.floor(x); // {1, 2, 3, ..., meetodite arv}
 
-        meetodiIndex = 2;
 
         if (meetodiIndex == 1) {
             // Äsja mängija pandud nupp asendatakse arvuti nupuga.
             asendaNupp(laud, vahetuseKoord, laud.getaNupp());
-        }
-        else if (meetodiIndex == 2) {
+        } else if (meetodiIndex == 2) {
             // Kogu mängulaud kustutatakse.
             label.setText("See küll hea valik polnud.");
             arvutiBanter = false;
             kustutaJaLooUusRuudustik(laud);
-        }
-        else if (meetodiIndex == 3) {
+        } else if (meetodiIndex == 3) {
             // Arvuti ei lase sinna ruutu käia.
             jätaKäikVahele(laud, vahetuseKoord);
-        }
-        else if (meetodiIndex == 4) {
+        } else if (meetodiIndex == 4) {
             // vahetame laual kõik nupud omavahel ära.
             vahetaKõik(laud);
         }
@@ -289,6 +293,25 @@ public class MänguLaud extends Application {
             }
         }
         return null; // Selle reani ei jõuta praktikas kunagi, aga ilma selle käsuta viskab veateate.
+    }
+
+    public void lõpuNupud(){
+        Button alustaUut = new Button("Alusta uut mängu");
+        Button sulgeProgramm = new Button("Sulge programm");
+
+        alustaUut.setOnMouseClicked(event -> {
+
+            määraNupud(peaLava2);
+            ruudud.getChildren().remove(alustaUut);
+            ruudud.getChildren().remove(sulgeProgramm);
+        });
+        sulgeProgramm.setOnMouseClicked(event -> {
+            Platform.exit();
+        });
+        alustaUut.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        sulgeProgramm.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruudud.add(alustaUut, 3, 3);
+        ruudud.add(sulgeProgramm, 3, 2);
     }
 
     public void iKäik(Laud laud, int[] käiguKoord) {
@@ -355,23 +378,23 @@ public class MänguLaud extends Application {
 
             if (Kontroll.võitja(laud).equals(laud.getiNupp())) {
                 jama(laud, käiguKoord);
-            }
-            else {
+            } else {
                 kuvaKäik(käiguKoord, laud.getiNupp());
             }
 
             if (Kontroll.võitja(laud).equals(laud.getaNupp())) {
                 label.setText("Veel üks võit tehisintellekti jaoks!");
-            }
-            else if (laud.getVabad().size() > 0) {
+                lõpuNupud();
+            } else if (laud.getVabad().size() > 0) {
                 aKäik(laud);
 
                 if (Kontroll.võitja(laud).equals(laud.getaNupp())) {
                     label.setText("Veel üks võit tehisintellekti jaoks!");
+                    lõpuNupud();
                 }
-            }
-            else {
+            } else {
                 label.setText("Sa oled päris hea, aga \nvõita mind endiselt ei suuda!");
+                lõpuNupud();
             }
         }
     }
@@ -382,6 +405,7 @@ public class MänguLaud extends Application {
     }
 
     public void määraNupud(Stage peaLava) {
+        peaLava2 = peaLava;
         // Vajalikud muutujad laua loomiseks.
         String[][] tühiLaud = {
                 {" ", " ", " "},
@@ -390,6 +414,9 @@ public class MänguLaud extends Application {
         };
         ArrayList<int[]> vabad = new ArrayList<>();
         String info = "Edu!";
+
+        juur = new GridPane();
+        Scene stsNupuMääramine = new Scene(juur);
 
         // graafilised elemendid
         Label label = new Label("Vali oma nupp");
@@ -433,7 +460,6 @@ public class MänguLaud extends Application {
         juur.setAlignment(Pos.TOP_CENTER);
 
         // Nupu küsimise akna loomine
-        Scene stsNupuMääramine = new Scene(juur);
         peaLava.setScene(stsNupuMääramine);
         peaLava.setHeight(175.0);
         peaLava.setWidth(450.0);
@@ -447,9 +473,6 @@ public class MänguLaud extends Application {
         label.setFont(new Font(20));
         määraNupud(peaLava);
     }
-
-
-
 
 
     /*Group juur = new Group();
