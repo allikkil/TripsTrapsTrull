@@ -4,18 +4,16 @@ import java.util.Arrays;
 
 
 public class Laud {
-    private String info; // Juhised mängijale
     private String[][] laud; // 3x3 maatriks; salvestab mängu hetkeseisu
     private ArrayList<int[]> vabad; // vabade ruutude koordinaatide List
     private String iNupp; // mängija ja arvuti nupud; 'X' või 'O'
     private String aNupp;
 
-    public Laud(String[][] laud, ArrayList<int[]> vabad, String iNupp, String aNupp, String info) {
+    public Laud(String[][] laud, ArrayList<int[]> vabad, String iNupp, String aNupp) {
         setLaud(laud);
         setVabad(vabad);
         setiNupp(iNupp);
         setaNupp(aNupp);
-        setInfo(info);
     }
 
     public String getiNupp() {
@@ -50,9 +48,6 @@ public class Laud {
         this.vabad = vabad;
     }
 
-    public String getInfo() { return info; }
-
-    public void setInfo(String info) { this.info = info; }
 
     public void käikLauale(int rida, int tulp, String nupp) {
         // Sisend: käigu koordinaadid ja asetatav nupp

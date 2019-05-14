@@ -2,42 +2,39 @@ package oop;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import static oop.Kontroll.kontroll;
 
 
 public class MänguLaud extends Application {
-    GridPane juur = new GridPane();
     GridPane ruudud = new GridPane();
     Label label = new Label("Edu!");
+
     boolean arvutiBanter = true; // kas ekraanile kuvatakse mõni taibukas kommentaar
     boolean käikJäetiVahele = false; // viimases hädas appi võetud muutuja, et ruudud õigesti töötaksid
-    Stage peaLava2 = new Stage();
+
+    Stage stgMäng = new Stage();
+
+    int vSkoor;
+    int aSkoor;
+    int iSkoor = 0;
 
 
     // Jamamismeetodid
@@ -66,18 +63,53 @@ public class MänguLaud extends Application {
         arvutiBanter = false;
     }
 
-    public void kustutaJaLooUusRuudustik(Laud laud) {
+    public void kustutaJaLooUusRuudustik(Laud laud) throws Exception {
         // Meetod kustutab mängulaualt kõik käigud.
         laud.setLaud(new String[][]{
                 {" ", " ", " "},
                 {" ", " ", " "},
                 {" ", " ", " "}});
+
         // Ka vabade ruutude massiiv lähtestatakse.
         laud.setVabad(genereeriVabad());
 
+        // Skoorid loetakse failist ja pannakse lauale.
+        loeSkoorid();
+        label.setText("Edu!");
+
+        Label arvuti = new Label("ARVUTI");
+        Label viik = new Label("VIIK");
+        Label inimene = new Label("INIMENE");
+
+        GridPane.setValignment(arvuti, VPos.BOTTOM);
+        GridPane.setValignment(viik, VPos.BOTTOM);
+        GridPane.setValignment(inimene, VPos.BOTTOM);
+        GridPane.setHalignment(arvuti, HPos.CENTER);
+        GridPane.setHalignment(viik, HPos.CENTER);
+        GridPane.setHalignment(inimene, HPos.CENTER);
+
+        double txtSize = 20;
+
+        arvuti.setFont(new Font(txtSize));
+        viik.setFont(new Font(txtSize));
+        inimene.setFont(new Font(txtSize));
+
+        Label skoorA = new Label(String.valueOf(aSkoor));
+        Label skoorV = new Label(String.valueOf(vSkoor));
+        Label skoorI = new Label(String.valueOf(iSkoor));
+        skoorA.setFont(new Font(txtSize));
+        skoorV.setFont(new Font(txtSize));
+        skoorI.setFont(new Font(txtSize));
+
+        GridPane.setValignment(skoorA, VPos.TOP);
+        GridPane.setValignment(skoorV, VPos.TOP);
+        GridPane.setValignment(skoorI, VPos.TOP);
+        GridPane.setHalignment(skoorA, HPos.CENTER);
+        GridPane.setHalignment(skoorV, HPos.CENTER);
+        GridPane.setHalignment(skoorI, HPos.CENTER);
+
         // Luuakse uus ruudustik.
         ruudud = new GridPane();
-        Stage stgMäng = new Stage();
         Scene stseen = new Scene(ruudud);
 
         // nuppudest ruutude loomine
@@ -91,8 +123,16 @@ public class MänguLaud extends Application {
         Button ruut8 = new Button();
         Button ruut9 = new Button();
 
-        // ruutude grupeerimine
+        // labeli ja skooride paigutus
         ruudud.add(label, 0, 0);
+        ruudud.add(arvuti, 3, 0);
+        ruudud.add(viik, 4, 0);
+        ruudud.add(inimene, 5, 0);
+        ruudud.add(skoorA, 3, 1);
+        ruudud.add(skoorV, 4, 1);
+        ruudud.add(skoorI, 5, 1);
+
+        // ruutude paigutus
         ruudud.add(ruut1, 0, 1);
         ruudud.add(ruut2, 1, 1);
         ruudud.add(ruut3, 2, 1);
@@ -102,19 +142,18 @@ public class MänguLaud extends Application {
         ruudud.add(ruut7, 0, 3);
         ruudud.add(ruut8, 1, 3);
         ruudud.add(ruut9, 2, 3);
-        ruudud.setAlignment(Pos.BOTTOM_CENTER);
 
-        // GridPane paigutus
-        // nelja tulba paigutus
-        for (int x = 0; x <= 3; x++) {
+        // GridPane paigutus:
+        // kuue tulba paigutus
+        for (int x = 1; x <= 6; x++) {
             ColumnConstraints cc = new ColumnConstraints();
-            cc.setPercentWidth(100.0 / 4);
+            cc.setPercentWidth(100.0 / 6);
             cc.setHgrow(Priority.ALWAYS);
             cc.setFillWidth(true);
             ruudud.getColumnConstraints().add(cc);
         }
         // nelja rea paigutus
-        for (int y = 0; y <= 3; y++) {
+        for (int y = 1; y <= 4; y++) {
             RowConstraints rc = new RowConstraints();
             rc.setPercentHeight(100.0 / 4);
             rc.setVgrow(Priority.ALWAYS);
@@ -122,6 +161,7 @@ public class MänguLaud extends Application {
             ruudud.getRowConstraints().add(rc);
         }
 
+        // ruudud muudetakse skaleeruvateks
         ruut1.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         ruut2.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         ruut3.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -136,31 +176,67 @@ public class MänguLaud extends Application {
 
         // Ruutudele luuakse funktsioon
         ruut1.setOnAction(event -> {
-            mainLoop(laud, 1);
+            try {
+                mainLoop(laud, 1);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut2.setOnAction(event -> {
-            mainLoop(laud, 2);
+            try {
+                mainLoop(laud, 2);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut3.setOnAction(event -> {
-            mainLoop(laud, 3);
+            try {
+                mainLoop(laud, 3);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut4.setOnAction(event -> {
-            mainLoop(laud, 4);
+            try {
+                mainLoop(laud, 4);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut5.setOnAction(event -> {
-            mainLoop(laud, 5);
+            try {
+                mainLoop(laud, 5);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut6.setOnAction(event -> {
-            mainLoop(laud, 6);
+            try {
+                mainLoop(laud, 6);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut7.setOnAction(event -> {
-            mainLoop(laud, 7);
+            try {
+                mainLoop(laud, 7);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut8.setOnAction(event -> {
-            mainLoop(laud, 8);
+            try {
+                mainLoop(laud, 8);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
         ruut9.setOnAction(event -> {
-            mainLoop(laud, 9);
+            try {
+                mainLoop(laud, 9);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
 
         // Kõik GridPane-i elemendid muudetakse skaleeruvaks.
@@ -187,7 +263,7 @@ public class MänguLaud extends Application {
         // Näidatakse ka mängijale.
         stgMäng.setScene(stseen);
         stgMäng.setMinHeight(400.0);
-        stgMäng.setMinWidth(500.0);
+        stgMäng.setMinWidth(700.0);
         stgMäng.setResizable(true);
         stgMäng.show();
     }
@@ -204,7 +280,7 @@ public class MänguLaud extends Application {
         arvutiBanter = false;
     }
 
-    public void jama(Laud laud, int[] vahetuseKoord) {
+    public void jama(Laud laud, int[] vahetuseKoord) throws Exception {
         // Sisend: vajalikud muutujad mängulaua manipuleerimiseks.
         // Meetod sisaldab erinevaid meetodeid, mis takistavad mängija võitmist.
 
@@ -232,6 +308,8 @@ public class MänguLaud extends Application {
         }
     }
 
+
+    // Meetodid, mida ei oska kuhugi mujale panna
     public ArrayList<int[]> genereeriVabad() {
         // Meetod tagastab tühjale lauale vastava vabade Listi.
         ArrayList<int[]> vabad = new ArrayList<>();
@@ -262,25 +340,23 @@ public class MänguLaud extends Application {
         return null; // Selle reani ei jõuta praktikas kunagi, aga ilma selle käsuta viskab veateate.
     }
 
-    public void lõpuNupud(){
-        Button alustaUut = new Button("Alusta uut mängu");
-        Button sulgeProgramm = new Button("Sulge programm");
-
-        alustaUut.setOnMouseClicked(event -> {
-
-            määraNupud(peaLava2);
-            ruudud.getChildren().remove(alustaUut);
-            ruudud.getChildren().remove(sulgeProgramm);
-        });
-        sulgeProgramm.setOnMouseClicked(event -> {
-            Platform.exit();
-        });
-        alustaUut.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        sulgeProgramm.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        ruudud.add(alustaUut, 3, 3);
-        ruudud.add(sulgeProgramm, 3, 2);
+    public void loeSkoorid() throws Exception {
+        aSkoor = FailiKirjutaLoe.loeASkoor();
+        vSkoor = FailiKirjutaLoe.loeVSkoor();
     }
 
+    public void uuendaASkoor() throws Exception {
+        aSkoor += 1;
+        FailiKirjutaLoe.kirjutaSkoorid(aSkoor, vSkoor);
+    }
+
+    public void uuendaVSkoor() throws Exception {
+        vSkoor += 1;
+        FailiKirjutaLoe.kirjutaSkoorid(aSkoor, vSkoor);
+    }
+
+
+    // Mängija ja arvuti käikude loomine
     public void iKäik(Laud laud, int[] käiguKoord) {
         int rida = käiguKoord[0];
         int tulp = käiguKoord[1];
@@ -329,6 +405,7 @@ public class MänguLaud extends Application {
 
                 // Luuakse uus nupp.
                 Button uusNupp = new Button(nupp);
+                uusNupp.setFont(new Font(25));
                 uusNupp.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
                 // Uus nupp lisatakse vana asukohale.
@@ -338,7 +415,9 @@ public class MänguLaud extends Application {
         }
     }
 
-    public void mainLoop(Laud laud, int ruut) {
+
+    // Mängu loogika
+    public void mainLoop(Laud laud, int ruut) throws Exception {
         if (!Kontroll.võitja(laud).equals(laud.getaNupp()) && laud.getVabad().size() > 0) {
             int[] käiguKoord = ruutKoordinaatideks(ruut);
             iKäik(laud, käiguKoord);
@@ -351,28 +430,59 @@ public class MänguLaud extends Application {
 
             if (Kontroll.võitja(laud).equals(laud.getaNupp())) {
                 label.setText("Veel üks võit tehisintellekti jaoks!");
+                uuendaASkoor();
                 lõpuNupud();
             } else if (laud.getVabad().size() > 0) {
                 aKäik(laud);
 
                 if (Kontroll.võitja(laud).equals(laud.getaNupp())) {
                     label.setText("Veel üks võit tehisintellekti jaoks!");
+                    uuendaASkoor();
                     lõpuNupud();
                 }
             } else {
                 label.setText("Sa oled päris hea, aga \nvõita mind endiselt ei suuda!");
+                uuendaVSkoor();
                 lõpuNupud();
             }
         }
     }
 
-    public void alustaMängu(Laud laud) {
+    public void alustaMängu(Laud laud) throws Exception {
         // Mängulaud tühjendatakse (vajalik juhul, kui alustati mitmendat raundi).
         kustutaJaLooUusRuudustik(laud);
     }
 
+
+    public void lõpuNupud() {
+        Button alustaUut = new Button("Alusta uut \nmängu");
+        alustaUut.setFont(new Font(15));
+        Button sulgeProgramm = new Button("Sulge \nprogramm");
+        sulgeProgramm.setFont(new Font(15));
+
+        // lõpunupud üksteisest natuke kaugemale
+        GridPane.setMargin(alustaUut, new Insets(0, 0, 0, 10));
+        GridPane.setMargin(sulgeProgramm, new Insets(0, 0, 0, 10));
+
+        alustaUut.setOnMouseClicked(event -> {
+            stgMäng.close();
+            Stage peaLava = new Stage();
+            määraNupud(peaLava);
+            ruudud.getChildren().remove(alustaUut);
+            ruudud.getChildren().remove(sulgeProgramm);
+        });
+
+        sulgeProgramm.setOnMouseClicked(event -> {
+            Platform.exit();
+        });
+
+        alustaUut.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        sulgeProgramm.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ruudud.add(alustaUut, 3, 2);
+        ruudud.add(sulgeProgramm, 3, 3);
+    }
+
     public void määraNupud(Stage peaLava) {
-        peaLava2 = peaLava;
         // Vajalikud muutujad laua loomiseks.
         String[][] tühiLaud = {
                 {" ", " ", " "},
@@ -380,10 +490,9 @@ public class MänguLaud extends Application {
                 {" ", " ", " "},
         };
         ArrayList<int[]> vabad = new ArrayList<>();
-        String info = "Edu!";
 
-        juur = new GridPane();
-        Scene stsNupuMääramine = new Scene(juur);
+        GridPane nupuValik = new GridPane();
+        Scene stsNupuMääramine = new Scene(nupuValik);
 
         // graafilised elemendid
         Label label = new Label("Vali oma nupp");
@@ -403,28 +512,36 @@ public class MänguLaud extends Application {
 
         // sündmuse lisamine nupule X
         nuppX.setOnAction(event -> {
-            Laud laud = new Laud(tühiLaud, vabad, "X", "O", info);
-            alustaMängu(laud);
+            Laud laud = new Laud(tühiLaud, vabad, "X", "O");
             peaLava.close();
+            try {
+                alustaMängu(laud);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
 
         // sündmuse lisamine nupule O
         nuppO.setOnAction(event -> {
-            Laud laud = new Laud(tühiLaud, vabad, "O", "X", info);
-            alustaMängu(laud);
+            Laud laud = new Laud(tühiLaud, vabad, "O", "X");
             peaLava.close();
+            try {
+                alustaMängu(laud);
+            } catch (Exception e) {
+                System.out.println("jama lugu");
+            }
         });
 
         // nuppude ja labeli paigutus
-        juur.add(label, 1, 0);
-        juur.add(nuppX, 0, 1);
-        juur.add(nuppO, 2, 1);
+        nupuValik.add(label, 1, 0);
+        nupuValik.add(nuppX, 0, 1);
+        nupuValik.add(nuppO, 2, 1);
 
         // GridPane paigutus
         RowConstraints rida0 = new RowConstraints();
         rida0.setPercentHeight(50);
-        juur.getRowConstraints().addAll(rida0);
-        juur.setAlignment(Pos.TOP_CENTER);
+        nupuValik.getRowConstraints().addAll(rida0);
+        nupuValik.setAlignment(Pos.TOP_CENTER);
 
         // Nupu küsimise akna loomine
         peaLava.setScene(stsNupuMääramine);

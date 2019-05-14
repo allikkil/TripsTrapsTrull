@@ -8,14 +8,17 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/Jama.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/Laud.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/oop/Laud.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/MänguLaud.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/TripsTrapsTrull.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/oop/Jama.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/oop/Laud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/oop/Laud.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/oop/MänguLaud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/oop/MänguLaud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/oop/TripsTrapsTrull.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -70,10 +73,49 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/oop/MänguLaud.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1262">
-              <caret line="216" selection-start-line="216" selection-end-line="216" />
+            <state relative-caret-position="64">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              <folding>
+                <element signature="method#vahetaKõik#0;class#MänguLaud#0" />
+                <element signature="method#jätaKäikVahele#0;class#MänguLaud#0" />
+                <element signature="method#asendaNupp#0;class#MänguLaud#0" />
+                <element signature="method#jama#0;class#MänguLaud#0" />
+                <element signature="method#genereeriVabad#0;class#MänguLaud#0" />
+                <element signature="method#ruutKoordinaatideks#0;class#MänguLaud#0" />
+                <element signature="method#loeSkoorid#0;class#MänguLaud#0" />
+                <element signature="method#uuendaASkoor#0;class#MänguLaud#0" />
+                <element signature="method#uuendaVSkoor#0;class#MänguLaud#0" />
+                <element signature="method#iKäik#0;class#MänguLaud#0" />
+                <element signature="method#aKäik#0;class#MänguLaud#0" />
+                <element signature="method#kuvaKäik#0;class#MänguLaud#0" />
+                <element signature="method#mainLoop#0;class#MänguLaud#0" />
+                <element signature="method#alustaMängu#0;class#MänguLaud#0" />
+                <element signature="method#määraNupud#0;class#MänguLaud#0" />
+                <element signature="e#19044#19045#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/oop/FailiKirjutaLoe.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/oop/Laud.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="11" column="83" selection-start-line="11" selection-start-column="83" selection-end-line="11" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#käikLauale#0;class#Laud#0" />
+                <element signature="method#koordRuuduks#0;class#Laud#0" />
+                <element signature="method#eemaldaVabadest#0;class#Laud#0" />
               </folding>
             </state>
           </provider>
@@ -88,16 +130,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/oop/Jama.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1248">
-              <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="88" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -123,6 +163,10 @@
       <find>kuvakä</find>
       <find>määra</find>
       <find>lõpu</find>
+      <find>meetodite</find>
+      <find>loeSk</find>
+      <find>kustuta</find>
+      <find>Inse</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -131,11 +175,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/oop/Laud.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/oop/TripsTrapsTrull.java" />
         <option value="$PROJECT_DIR$/src/main/java/oop/Kontroll.java" />
         <option value="$PROJECT_DIR$/src/main/java/oop/Jama.java" />
+        <option value="$PROJECT_DIR$/src/main/java/oop/Laud.java" />
+        <option value="$PROJECT_DIR$/src/main/java/oop/FailiLugeja.java" />
+        <option value="$PROJECT_DIR$/src/main/java/oop/FailiKirjutaLoe.java" />
         <option value="$PROJECT_DIR$/src/main/java/oop/MänguLaud.java" />
       </list>
     </option>
@@ -272,7 +318,7 @@
       <window_info anchor="bottom" id="Build" order="6" weight="0.044692736" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" />
-      <window_info anchor="bottom" id="Run" order="9" weight="0.2542662" />
+      <window_info anchor="bottom" id="Run" order="9" weight="0.09556314" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.31228667" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -504,23 +550,7 @@
     <entry file="file://$PROJECT_DIR$/../../MänguLaud (1).class" />
     <entry file="file://$PROJECT_DIR$/../../MänguLaud$Ruut.class" />
     <entry file="file://$PROJECT_DIR$/../../MänguLaud.class" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/oop/Laud.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="56" column="16" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/oop/TripsTrapsTrull.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/oop/TripsTrapsTrull.java" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/11.0.2/c082cdf645f9833408dcd960bf68344c9384f569/javafx-base-11.0.2-sources.jar!/javafx/event/EventType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -608,12 +638,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/oop/MänguLaud.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/oop/Jama.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/oop/Laud.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1262">
-          <caret line="216" selection-start-line="216" selection-end-line="216" />
+        <state relative-caret-position="160">
+          <caret line="11" column="83" selection-start-line="11" selection-start-column="83" selection-end-line="11" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#käikLauale#0;class#Laud#0" />
+            <element signature="method#koordRuuduks#0;class#Laud#0" />
+            <element signature="method#eemaldaVabadest#0;class#Laud#0" />
           </folding>
         </state>
       </provider>
@@ -625,10 +659,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/oop/Jama.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/oop/FailiKirjutaLoe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1248">
-          <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="88" selection-end-column="5" />
+        <state relative-caret-position="48">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/oop/MänguLaud.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="method#vahetaKõik#0;class#MänguLaud#0" />
+            <element signature="method#jätaKäikVahele#0;class#MänguLaud#0" />
+            <element signature="method#asendaNupp#0;class#MänguLaud#0" />
+            <element signature="method#jama#0;class#MänguLaud#0" />
+            <element signature="method#genereeriVabad#0;class#MänguLaud#0" />
+            <element signature="method#ruutKoordinaatideks#0;class#MänguLaud#0" />
+            <element signature="method#loeSkoorid#0;class#MänguLaud#0" />
+            <element signature="method#uuendaASkoor#0;class#MänguLaud#0" />
+            <element signature="method#uuendaVSkoor#0;class#MänguLaud#0" />
+            <element signature="method#iKäik#0;class#MänguLaud#0" />
+            <element signature="method#aKäik#0;class#MänguLaud#0" />
+            <element signature="method#kuvaKäik#0;class#MänguLaud#0" />
+            <element signature="method#mainLoop#0;class#MänguLaud#0" />
+            <element signature="method#alustaMängu#0;class#MänguLaud#0" />
+            <element signature="method#määraNupud#0;class#MänguLaud#0" />
+            <element signature="e#19044#19045#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
